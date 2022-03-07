@@ -35,7 +35,7 @@ namespace decaPoints.Model
                     PoleVault = 4.80,
                     Javelin = 59,
                     FifteenHundredMeters = "4:32.2",
-
+                    TotalPoints = 7937,
                 }) ;
 
         }

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import { nanoid } from 'nanoid';
 import "./App.css";
 import data from "./deca-mock-data.json";
+import ReadOnlyRow from './components/ReadOnlyRow';
+import EditableRow from './components/EditableRow';
 
 const App = () => {
 
-  const [competitors, setCompetitors] = useState(data);
-  const [addFormData, setAddFormData] = useState({
+  const [competitors, setCompetitors] = useState(data);  //dynamic
+  const [addFormData, setAddFormData] = useState({ //adding new entries
     fullName:'',
     dateOfBirth:'',
     hundredMeters:'',
@@ -14,7 +16,7 @@ const App = () => {
     shotPut:'',
     highJump:'',
     fourHundredMeters:'',
-    Hurdles:'',
+    hurdles:'',
     discus:'',
     poleVault:'',
     javelin:'',
@@ -23,7 +25,7 @@ const App = () => {
     
   })
 
-  const handleAddFormChange = (event) => {
+  const handleAddFormChange = (event) => {  //asserts correct inserted value to the right field
     event.preventDefault();
 
     const fieldName = event.target.getAttribute('name');
@@ -34,7 +36,7 @@ const App = () => {
     setAddFormData(newFormData);
   };
 
-  const handleAddFormSubmit = (event) => {
+  const handleAddFormSubmit = (event) => {  //adds from the for to the table
     event.preventDefault();
     const newCompetitor = {
       id: nanoid(),
@@ -45,7 +47,7 @@ const App = () => {
       shotPut: addFormData.shotPut,
       highJump: addFormData.highJump,
       fourHundredMeters: addFormData.fourHundredMeters,
-      Hurdles: addFormData.Hurdles,
+      hurdles: addFormData.hurdles,
       discus: addFormData.discus,
       poleVault: addFormData.poleVault,
       javelin: addFormData.javelin,
@@ -57,6 +59,7 @@ const App = () => {
   };
 
   return <div className='app-container'>
+    <form>
     <table>
       <thead>
         <tr>
@@ -77,24 +80,14 @@ const App = () => {
       </thead>
       <tbody>
         {competitors.map((competitor) => (
-          <tr>
-          <td>{competitor.fullName}</td>
-          <td>{competitor.dateOfBirth}</td>
-          <td>{competitor['hundredMeters']}</td>
-          <td>{competitor.longJump}</td>
-          <td>{competitor.shotPut}</td>
-          <td>{competitor.highJump}</td>
-          <td>{competitor['fourHundredMeters']}</td>
-          <td>{competitor['Hurdles']}</td>
-          <td>{competitor.discus}</td>
-          <td>{competitor.poleVault}</td>
-          <td>{competitor.javelin}</td>
-          <td>{competitor['fifteenHundredMeters']}</td>
-          <td>{competitor.totalScore}</td>
-        </tr>
+          <Fragment>
+              <EditableRow/>
+          <ReadOnlyRow competitor={competitor}/>
+          </Fragment>
         ))}
       </tbody>
     </table>
+    </form>
     <h2>Add new competitor</h2>
     <form onSubmit={handleAddFormSubmit}>
       <input type="text" name="fullName" required="required" onChange={handleAddFormChange}/>
@@ -104,7 +97,7 @@ const App = () => {
       <input type="decimal" name="shotPut" required="required" onChange={handleAddFormChange}/>
       <input type="decimal" name="highJump" required="required" onChange={handleAddFormChange}/>
       <input type="decimal" name="fourHundredMeters" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="Hurdles" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="hurdles" required="required" onChange={handleAddFormChange}/>
       <input type="decimal" name="discus" required="required" onChange={handleAddFormChange}/>
       <input type="decimal" name="poleVault" required="required" onChange={handleAddFormChange}/>
       <input type="decimal" name="javelin" required="required"  onChange={handleAddFormChange}/>

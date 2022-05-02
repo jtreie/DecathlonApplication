@@ -53,16 +53,16 @@ export class Contestants extends React.PureComponent<{}, ContestantState> {
       <tr> 
        <th>Name</th>
        <th>Gender</th>
-       <th>100m</th>
+       <th>hundredMeters</th>
        <th>Long Jump</th>
        <th>Shot Put</th>
        <th>High Jump</th>
-       <th>400m</th>
+       <th>fourHundredMeters</th>
        <th>110m hurdles</th>
        <th>Discus</th>
        <th>Pole Vault</th>
        <th>Javelin</th>
-       <th>1500m</th>
+       <th>fifteenHundredMeters</th>
        <th>Total Score</th>
       </tr>
      </thead>

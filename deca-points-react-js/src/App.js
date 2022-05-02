@@ -1,7 +1,61 @@
 import React, { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import "./App.css";
+import data from "./deca-mock-data.json";
 
 const App = () => {
+
+  const [competitors, setCompetitors] = useState(data);
+  const [addFormData, setAddFormData] = useState({
+    fullName:'',
+    dateOfBirth:'',
+    hundredMeters:'',
+    longJump:'',
+    shotPut:'',
+    highJump:'',
+    fourHundredMeters:'',
+    Hurdles:'',
+    discus:'',
+    poleVault:'',
+    javelin:'',
+    fifteenHundredMeters:'',
+    totalScore:''
+    
+  })
+
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute('name');
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData};
+    newFormData[fieldName] = fieldValue;
+    setAddFormData(newFormData);
+  };
+
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    const newCompetitor = {
+      id: nanoid(),
+      fullName: addFormData.fullName,
+      dateOfBirth: addFormData.dateOfBirth,
+      hundredMeters: addFormData.hundredMeters,
+      longJump: addFormData.longJump,
+      shotPut: addFormData.shotPut,
+      highJump: addFormData.highJump,
+      fourHundredMeters: addFormData.fourHundredMeters,
+      Hurdles: addFormData.Hurdles,
+      discus: addFormData.discus,
+      poleVault: addFormData.poleVault,
+      javelin: addFormData.javelin,
+      fifteenHundredMeters: addFormData.fifteenHundredMeters,
+      totalScore: addFormData.totalScore
+    };
+    const newCompetitors = [...competitors, newCompetitor];
+    setCompetitors(newCompetitors);
+  };
+
   return <div className='app-container'>
     <table>
       <thead>
@@ -22,198 +76,42 @@ const App = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Peeter Paan</td>
-          <td>04/10/1998</td>
-          <td>11.12</td>
-          <td>7.23</td>
-          <td>13.22</td>
-          <td>1.99</td>
-          <td>49.32</td>
-          <td>14.14</td>
-          <td>44.44</td>
-          <td>4.40</td>
-          <td>50.23</td>
-          <td>4:42.22</td>
-          <td>8000</td>
+        {competitors.map((competitor) => (
+          <tr>
+          <td>{competitor.fullName}</td>
+          <td>{competitor.dateOfBirth}</td>
+          <td>{competitor['hundredMeters']}</td>
+          <td>{competitor.longJump}</td>
+          <td>{competitor.shotPut}</td>
+          <td>{competitor.highJump}</td>
+          <td>{competitor['fourHundredMeters']}</td>
+          <td>{competitor['Hurdles']}</td>
+          <td>{competitor.discus}</td>
+          <td>{competitor.poleVault}</td>
+          <td>{competitor.javelin}</td>
+          <td>{competitor['fifteenHundredMeters']}</td>
+          <td>{competitor.totalScore}</td>
         </tr>
+        ))}
       </tbody>
     </table>
+    <h2>Add new competitor</h2>
+    <form onSubmit={handleAddFormSubmit}>
+      <input type="text" name="fullName" required="required" onChange={handleAddFormChange}/>
+      <input type="text" name="dateOfBirth" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="hundredMeters" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="longJump" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="shotPut" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="highJump" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="fourHundredMeters" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="Hurdles" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="discus" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="poleVault" required="required" onChange={handleAddFormChange}/>
+      <input type="decimal" name="javelin" required="required"  onChange={handleAddFormChange}/>
+      <input type="text" name="fifteenHundredMeters" required="required"  onChange={handleAddFormChange}/>
+      <input type="number" name="totalScore" required="required" onChange={handleAddFormChange}/>
+      <button type="submit">Add</button>
+    </form>
   </div>;
 }
-// function Example() {
-
-//  const data = React.useMemo(
-//      () => [
-//        {
-//          col1: 'Johannes',
-//          col2: '10/04/1998',
-//          col3: 'male',
-//          col4: '10.9',
-//          col5: '7.22',
-//          col6: '13.22',
-//          col7: '1.99',
-//          col8: '49.98',
-//          col9: '14.12',
-//          col10: '43.29',
-//          col11: '4.90',
-//          col12: '56.20',
-//          col13: '4:23:12',
-//          col14: '8000'
-//        },
-//        {
-//         col1: 'Jaanus',
-//         col2: '10/04/1998',
-//         col3: 'male',
-//         col4: '10.9',
-//         col5: '7.22',
-//         col6: '13.22',
-//         col7: '1.99',
-//         col8: '49.98',
-//         col9: '14.12',
-//         col10: '43.29',
-//         col11: '4.90',
-//         col12: '56.20',
-//         col13: '4:23:12',
-//         col14: '8000'
-//        },
-//        {
-//         col1: 'Jane',
-//         col2: '10/04/1998',
-//         col3: 'male',
-//         col4: '10.9',
-//         col5: '7.22',
-//         col6: '13.22',
-//         col7: '1.99',
-//         col8: '49.98',
-//         col9: '14.12',
-//         col10: '43.29',
-//         col11: '4.90',
-//         col12: '56.20',
-//         col13: '4:23:12',
-//         col14: '8000'
-//        },
-//      ],
-//      []
-//  )
-
-//  const columns = React.useMemo(
-//      () => [
-//        {
-//          Header: 'Name',
-//          accessor: 'col1', // accessor is the "key" in the data
-//        },
-//        {
-//          Header: 'Date of birth',
-//          accessor: 'col2',
-//        },
-//        {
-//          Header: 'Gender',
-//          accessor: 'col3', // accessor is the "key" in the data
-//        },
-//        {
-//         Header: 'Sprint',
-//         accessor: 'col4', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: 'Long jump',
-//         accessor: 'col5',
-//       },
-//       {
-//         Header: 'Shot Put',
-//         accessor: 'col6', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: 'High jump',
-//         accessor: 'col7', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: '400m',
-//         accessor: 'col8',
-//       },
-//       {
-//         Header: '100m hurdles',
-//         accessor: 'col9', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: 'Discus',
-//         accessor: 'col10', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: 'Pole Vault',
-//         accessor: 'col11',
-//       },
-//       {
-//         Header: 'Javelin',
-//         accessor: 'col12', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: '1500m',
-//         accessor: 'col13', // accessor is the "key" in the data
-//       },
-//       {
-//         Header: 'Total score',
-//         accessor: 'col14',
-//       },
-//      ],
-//      []
-//  )
-
-//  const {
-//    getTableProps,
-//    getTableBodyProps,
-//    headerGroups,
-//    rows,
-//    prepareRow,
-//  } = useTable({ columns, data })
-
-//  return (
-//   <React.Fragment>
-//      <div>
-//        <table {...getTableProps()} style={{ border: 'solid 1px black' }}>
-//          <thead>
-//          {headerGroups.map(headerGroup => (
-//              <tr {...headerGroup.getHeaderGroupProps()}>
-//                {headerGroup.headers.map(column => (
-//                    <th
-//                        {...column.getHeaderProps()}
-//                        style={{
-//                          borderBottom: 'solid 3px red',
-//                          color: 'black',
-//                        }}
-//                    >
-//                      {column.render('Header')}
-//                    </th>
-//                ))}
-//              </tr>
-//          ))}
-//          </thead>
-//          <tbody {...getTableBodyProps()}>
-//          {rows.map(row => {
-//            prepareRow(row)
-//            return (
-//                <tr {...row.getRowProps()}>
-//                  {row.cells.map(cell => {
-//                    return (
-//                        <td
-//                            {...cell.getCellProps()}
-//                            style={{
-//                              padding: '10px',
-//                              border: 'solid 1px gray',
-//                            }}
-//                        >
-//                          {cell.render('Cell')}
-//                        </td>
-//                    )
-//                  })}
-//                </tr>
-//            )
-//          })}
-//          </tbody>
-//        </table>
-//      </div>
-//      </React.Fragment>
-//  );
-// }
-
 export default App;

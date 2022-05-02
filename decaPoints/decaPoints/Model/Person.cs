@@ -21,7 +21,7 @@ namespace decaPoints.Model
         public double PoleVault { get; set; }
         public double Javelin { get; set; }
         public String FifteenHundredMeters { get; set; }
-        public int TotalPoints { get; set; }
+        public double TotalPoints { get; set; }
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]

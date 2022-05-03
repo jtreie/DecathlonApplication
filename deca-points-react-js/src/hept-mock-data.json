@@ -1,0 +1,15 @@
+[
+    {
+      "id": 1,
+      "fullName": "Kevin Mayer",
+      "dateOfBirth": "10.02.1992",
+      "hurdles": "13.55",
+      "shotPut": "16.00",
+      "highJump": "1.80",
+      "twoHundredMeters": "25.00",
+      "longJump": "5.50",
+      "javelin": "41.90",
+      "eightHundredMeters": "2:22.11",
+      "totalScore": "6126"
+    }
+]

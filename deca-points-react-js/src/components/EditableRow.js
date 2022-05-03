@@ -21,7 +21,6 @@ const EditableRow = ({editFormData, handleEditFormChange, handleCancelClick}) =>
         <td><input type="decimal" name="poleVault" value={editFormData.poleVault} onChange={handleEditFormChange}/></td>
         <td><input type="decimal" name="javelin" value={editFormData.javelin} onChange={handleEditFormChange}/></td>
         <td><input type="text" name="fifteenHundredMeters" value={editFormData.fifteenHundredMeters} onChange={handleEditFormChange}/></td>
-        <td><input type="number" name="totalScore" value={editFormData.totalScore} onChange={handleEditFormChange}/></td>
         <td>
             <button type="submit">Save</button>
             <button type="button" onClick={handleCancelClick}>Cancel</button>

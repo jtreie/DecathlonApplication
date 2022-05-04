@@ -1,14 +1,14 @@
 import React from "react";
-import hundredMeters from "../Calculator/Runs/hundredMeters.js";
-import longJump from "../Calculator/Jumps/longJump.js";
-import shotPut from "../Calculator/Throws/shotPut.js";
-import highJump from "../Calculator/Jumps/highJump.js";
-import fourHundredMeters from "../Calculator/Runs/fourHundred.js";
-import hurdles from "../Calculator/Runs/hurdles.js"
-import discus from "../Calculator/Throws/discusThrow.js";
-import poleVault from "../Calculator/Jumps/poleVault.js";
-import javelin from "../Calculator/Throws/javelinThrow.js";
-import fifteenHundredMeters from "../Calculator/Runs/fifteenHundredMeters.js"
+import hundredMeters from "../Calculator/Decathlon/Runs/hundredMeters.js";
+import longJump from "../Calculator/Decathlon/Jumps/longJump.js";
+import shotPut from "../Calculator/Decathlon/Throws/shotPut.js";
+import highJump from "../Calculator/Decathlon/Jumps/highJump.js";
+import fourHundredMeters from "../Calculator/Decathlon/Runs/fourHundred.js";
+import hurdles from "../Calculator/Decathlon/Runs/hurdles.js"
+import discus from "../Calculator/Decathlon/Throws/discusThrow.js";
+import poleVault from "../Calculator/Decathlon/Jumps/poleVault.js";
+import javelin from "../Calculator/Decathlon/Throws/javelinThrow.js";
+import fifteenHundredMeters from "../Calculator/Decathlon/Runs/fifteenHundredMeters.js"
 // function pointss(competitor){
 //           var p = a * Math.Pow((Number(competitor.longJump)*100 - b), c);
 //      var points = Math.Floor(p);

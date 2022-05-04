@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from 'react';
 import { nanoid } from 'nanoid';
-import "./App.css";
-import data from "./deca-mock-data.json";
-import ReadOnlyRow from './components/ReadOnlyRow';
-import EditableRow from './components/EditableRow';
-import Heptathlon from './Heptathlon';
+import "../App.css";
+import data from "../deca-mock-data.json";
+import ReadOnlyRow from './ReadOnlyRow';
+import EditableRow from './EditableRow';
 
 
 const Decathlon = () => {
@@ -154,7 +153,10 @@ const Decathlon = () => {
 
  return (
   <div className='app-container'>
-    <h1>Decathlon</h1>
+    <h1><button>Mens Decathlon</button> <button type="button" 
+    onClick={(e) => {
+      e.preventDefault();
+      window.location.href="http://localhost:3001/heptathlon"}}>Womens Heptathlon</button></h1>
     <form onSubmit={handleEditFormSubmit}>
     <table>
       <thead>

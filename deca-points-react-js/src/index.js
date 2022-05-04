@@ -1,32 +1,51 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './Decathlon';
-import Heptathlon from './Heptathlon';
-import reportWebVitals from './reportWebVitals';
-import {BrowserRouter} from 'react-router-dom';
-import Decathlon from './Decathlon';
+import ReactDOM from "react-dom";
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  Navigation,
+  Footer,
+  Home,
+  Decathlon,
+  Heptathlon
+} from "./components";
 
-// ReactDOM.render(
 //   <BrowserRouter basename='/'>
 //     <App />
 //   </BrowserRouter>,
 //   document.getElementById('root')
 // );
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
 
-  <BrowserRouter>
-    <div>
-      <App />
-      {/* <Decathlon />
-      <Heptathlon/> */}
-    </div>
-    </BrowserRouter>
-  // </React.StrictMode> 
-);
+//   <BrowserRouter>
+//     <div>
+//       <App />
+//     </div>
+//     </BrowserRouter>
+//   </React.StrictMode> 
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
+
+ReactDOM.render(
+  <Router>
+    <Navigation />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/decathlon" element={<Decathlon />} />
+      <Route path="/heptathlon" element={<Heptathlon />} />
+    </Routes>
+    <Footer />
+  </Router>,
+
+  document.getElementById("root")
+);
+
+serviceWorker.unregister();
+
+

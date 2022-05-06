@@ -149,12 +149,12 @@ const Heptathlon = () => {
      <h1><button type="button"
        onClick={(e) => {
          e.preventDefault();
-         window.location.href = "http://localhost:3001/decathlon";
+         window.location.href = "http://localhost:3000/decathlon";
        } }>Mens Decathlon</button>
        <button type="button"
          onClick={(e) => {
            e.preventDefault();
-           window.location.href = "http://localhost:3001/heptathlon";
+           window.location.href = "http://localhost:3000/heptathlon";
          } }>Womens Heptathlon</button></h1>
      <form onSubmit={handleEditFormSubmit}>
        <table>
@@ -197,13 +197,13 @@ const Heptathlon = () => {
      <button type='button' onClick="handleButtonClick()">Add new heptathlete</button><form id='hideform' onSubmit={handleAddFormSubmit}>
        <input type="text" name="fullName" required="required" onChange={handleAddFormChange} />
        <input type="text" name="dateOfBirth" required="required" onChange={handleAddFormChange} />
-       <input type="decimal" name="hurdles" required="required" onChange={handleAddFormChange} />
-       <input type="decimal" name="shotPut" required="required" onChange={handleAddFormChange} />
-       <input type="decimal" name="highJump" required="required" onChange={handleAddFormChange} />
-       <input type="decimal" name="twoHundredMeters" required="required" onChange={handleAddFormChange} />
-       <input type="decimal" name="longJump" required="required" onChange={handleAddFormChange} />
-       <input type="decimal" name="javelin" required="required" onChange={handleAddFormChange} />
-       <input type="text" name="eightHundredMeters" required="required" onChange={handleAddFormChange} />
+       <input type="decimal" name="hurdles" onChange={handleAddFormChange} />
+       <input type="decimal" name="shotPut" onChange={handleAddFormChange} />
+       <input type="decimal" name="highJump" onChange={handleAddFormChange} />
+       <input type="decimal" name="twoHundredMeters" onChange={handleAddFormChange} />
+       <input type="decimal" name="longJump" onChange={handleAddFormChange} />
+       <input type="decimal" name="javelin" onChange={handleAddFormChange} />
+       <input type="text" name="eightHundredMeters" onChange={handleAddFormChange} />
        <button type="submit">Add</button>
      </form> 
     </div>

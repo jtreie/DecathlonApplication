@@ -65,7 +65,7 @@ const Decathlon = () => {
     setEditFormData(newFormData);
   };
 
-  const handleAddFormSubmit = (event) => {  //adds from the for to the table
+  const handleAddFormSubmit = (event) => {  //adds from the form to the table
     event.preventDefault();
     const newCompetitor = {
       id: nanoid(),
@@ -153,10 +153,14 @@ const Decathlon = () => {
 
  return (
   <div className='app-container'>
-    <h1><button>Mens Decathlon</button> <button type="button" 
+    <h1><button type="button"
+       onClick={(e) => {
+         e.preventDefault();
+         window.location.href = "http://localhost:3000/decathlon";
+       } }>Mens Decathlon</button> <button type="button" 
     onClick={(e) => {
       e.preventDefault();
-      window.location.href="http://localhost:3001/heptathlon"}}>Womens Heptathlon</button></h1>
+      window.location.href="http://localhost:3000/heptathlon"}}>Womens Heptathlon</button></h1>
     <form onSubmit={handleEditFormSubmit}>
     <table>
       <thead>
@@ -201,16 +205,16 @@ const Decathlon = () => {
     <form onSubmit={handleAddFormSubmit}>
       <input type="text" name="fullName" required="required" onChange={handleAddFormChange}/>
       <input type="text" name="dateOfBirth" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="hundredMeters" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="longJump" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="shotPut" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="highJump" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="fourHundredMeters" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="hurdles" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="discus" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="poleVault" required="required" onChange={handleAddFormChange}/>
-      <input type="decimal" name="javelin" required="required"  onChange={handleAddFormChange}/>
-      <input type="text" name="fifteenHundredMeters" required="required"  onChange={handleAddFormChange}/>
+      <input type="decimal" name="hundredMeters" onChange={handleAddFormChange}/>
+      <input type="decimal" name="longJump" onChange={handleAddFormChange}/>
+      <input type="decimal" name="shotPut" onChange={handleAddFormChange}/>
+      <input type="decimal" name="highJump" onChange={handleAddFormChange}/>
+      <input type="decimal" name="fourHundredMeters" onChange={handleAddFormChange}/>
+      <input type="decimal" name="hurdles" onChange={handleAddFormChange}/>
+      <input type="decimal" name="discus" onChange={handleAddFormChange}/>
+      <input type="decimal" name="poleVault" onChange={handleAddFormChange}/>
+      <input type="decimal" name="javelin"  onChange={handleAddFormChange}/>
+      <input type="text" name="fifteenHundredMeters"  onChange={handleAddFormChange}/>
       <button type="submit">Add</button>
     </form>
   </div>

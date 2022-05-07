@@ -138,11 +138,7 @@ const Heptathlon = () => {
     newHeptathletes.splice(index, 1);
 
     setHeptathletes(newHeptathletes);
-  };
-  const showAddForm = () => {
-      document.getElementById('textbox1').style.display='none';
-  }
-  
+  };  
 
  return (
     <div className='app-container'>

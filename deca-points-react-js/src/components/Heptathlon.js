@@ -9,13 +9,15 @@ import EditableHeptRow from './EditableHeptRow';
   
 const Heptathlon = () => {
 
+  const [toggle, setToggle] = useState(false)
+
   const [heptathletes, setHeptathletes] = useState(data);  //dynamic
   const [addFormData, setAddFormData] = useState({ //adding new entries
     fullName:'',
     dateOfBirth:'',
     hurdles:'',
-    shotPut:'',
     highJump:'',
+    shotPut:'',
     twoHundredMeters:'',
     longJump:'',
     javelin:'',
@@ -27,8 +29,8 @@ const Heptathlon = () => {
     fullName:'',
     dateOfBirth:'',
     hurdles:'',
-    shotPut:'',
     highJump:'',
+    shotPut:'',
     twoHundredMeters:'',
     longJump:'',
     javelin:'',
@@ -67,8 +69,8 @@ const Heptathlon = () => {
       fullName: addFormData.fullName,
       dateOfBirth: addFormData.dateOfBirth,
       hurdles: addFormData.hurdles,
-      shotPut: addFormData.shotPut,
       highJump: addFormData.highJump,
+      shotPut: addFormData.shotPut,
       twoHundredMeters: addFormData.twoHundredMeters,
       longJump: addFormData.longJump,
       javelin: addFormData.javelin,
@@ -86,12 +88,9 @@ const Heptathlon = () => {
      fullName: heptathlete.fullName,
      dateOfBirth: heptathlete.dateOfBirth,
      hurdles: heptathlete.hurdles,
-     longJump: heptathlete.longJump,
-     shotPut: heptathlete.shotPut,
      highJump: heptathlete.highJump,
+     shotPut: heptathlete.shotPut,
      twoHundredMeters: heptathlete.twoHundredMeters,
-     hurdles: heptathlete.hurdles,
-     discus: heptathlete.discus,
      longJump: heptathlete.longJump,
      javelin: heptathlete.javelin,
      eightHundredMeters: heptathlete.eightHundredMeters
@@ -108,8 +107,8 @@ const Heptathlon = () => {
       fullName: editFormData.fullName,
       dateOfBirth: editFormData.dateOfBirth,
       hurdles: editFormData.hurdles,
-      shotPut: editFormData.shotPut,
       highJump: editFormData.highJump,
+      shotPut: editFormData.shotPut,
       twoHundredMeters: editFormData.twoHundredMeters,
       longJump: editFormData.longJump,
       javelin: editFormData.javelin,
@@ -159,8 +158,8 @@ const Heptathlon = () => {
              <th>Name</th>
              <th>Date of birth</th>
              <th>Hurdles</th>
-             <th>Shot put</th>
              <th>High jump</th>
+             <th>Shot put</th>
              <th>200m</th>
              <th>Long Jump</th>
              <th>Javelin</th>
@@ -188,20 +187,22 @@ const Heptathlon = () => {
          </tbody>
        </table>
      </form>
-     <button type="button" onclick="javascript:showAddForm()">vajuta</button>
-     <h3 id='textbox1'>Peetr</h3>
-     <button type='button' onClick="handleButtonClick()">Add new heptathlete</button><form id='hideform' onSubmit={handleAddFormSubmit}>
+     {toggle && (          
+       <form onSubmit={handleAddFormSubmit}>
        <input type="text" name="fullName" required="required" onChange={handleAddFormChange} />
        <input type="text" name="dateOfBirth" required="required" onChange={handleAddFormChange} />
        <input type="decimal" name="hurdles" onChange={handleAddFormChange} />
-       <input type="decimal" name="shotPut" onChange={handleAddFormChange} />
        <input type="decimal" name="highJump" onChange={handleAddFormChange} />
+       <input type="decimal" name="shotPut" onChange={handleAddFormChange} />
        <input type="decimal" name="twoHundredMeters" onChange={handleAddFormChange} />
        <input type="decimal" name="longJump" onChange={handleAddFormChange} />
        <input type="decimal" name="javelin" onChange={handleAddFormChange} />
        <input type="text" name="eightHundredMeters" onChange={handleAddFormChange} />
        <button type="submit">Add</button>
      </form> 
+      )}
+     <button onClick={() => setToggle(!toggle)} className='btn' >Add new competitor</button>
+      
     </div>
  );
 }

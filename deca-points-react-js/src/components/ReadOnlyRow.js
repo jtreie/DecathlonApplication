@@ -161,7 +161,6 @@ const ReadOnlyRow = ({ competitor, handleEditClick, handleDeleteClick}) => {
             <button type="button" onClick={() => handleDeleteClick(competitor.id)}>
           Delete</button>
           </td>
-          <td>{hurdlesPoints()}</td>
           </tr>
     );
 };

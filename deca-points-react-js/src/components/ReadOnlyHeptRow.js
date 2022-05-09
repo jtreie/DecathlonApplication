@@ -84,7 +84,7 @@ const ReadOnlyHeptRow = ({ heptathlete, handleEditClick, handleDeleteClick}) => 
       var number = 0;
       if(heptathlete.eightHundredMeters === '') 
       {number += 0
-      } else if(time < 11150.71 || time > 250.79) {
+      } else if(time < 111.71 || time > 250.79) {
         number += 0;
       } else {
         number += Math.floor(eightHundredMeters.eightHundredMeters.a*Math.pow(eightHundredMeters.eightHundredMeters.b-time,eightHundredMeters.eightHundredMeters.c))
@@ -96,15 +96,15 @@ const ReadOnlyHeptRow = ({ heptathlete, handleEditClick, handleDeleteClick}) => 
           <td>{heptathlete.fullName}</td>
           <td>{heptathlete.dateOfBirth}</td>
           <td>{heptathlete.hurdles}</td>
-          <td>{heptathlete.shotPut}</td>
           <td>{heptathlete.highJump}</td>
+          <td>{heptathlete.shotPut}</td>
           <td>{heptathlete.twoHundredMeters}</td>
           <td>{heptathlete.longJump}</td>
           <td>{heptathlete.javelin}</td>
           <td>{heptathlete.eightHundredMeters}</td>
           <td>{hurdlesPoints() +
-            shotPutPoints()+
             highJumpPoints()+
+            shotPutPoints()+
             twoHundredPoints()+
             longJumpPoints()+
             javelinPoints()+
@@ -115,7 +115,7 @@ const ReadOnlyHeptRow = ({ heptathlete, handleEditClick, handleDeleteClick}) => 
             <button type="button" onClick={() => handleDeleteClick(heptathlete.id)}>
           Delete</button>
           </td>
-          <td>{eightHundredPoints()}</td></tr>
+          </tr>
     );
 };
 

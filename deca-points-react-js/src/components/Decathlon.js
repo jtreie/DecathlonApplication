@@ -1,13 +1,28 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, Component } from 'react';
 import { nanoid } from 'nanoid';
 import "../App.css";
 import data from "../deca-mock-data.json";
 import ReadOnlyRow from './ReadOnlyRow';
 import EditableRow from './EditableRow';
+import { useTranslation, Trans } from 'react-i18next'
+    
 
-
+const lngs = [
+      { value: 'en', text: "English" },
+      { value: 'est', text: "Eesti" }
+    ]
 const Decathlon = () => {
+  
+  const { t, i18n } = useTranslation(); 
+//   const [lang, setLang] = useState('en');
+//   const handleChange = e => { 
+//     setLang(e.target.value);
+//     let loc = "http://localhost:3000/decathlon";
+//     window.location.replace(loc + "?lng=" + e.target.value);
+// }
 
+  const [toggle, setToggle] = useState(false)
+  
   const [competitors, setCompetitors] = useState(data);  //dynamic
   const [addFormData, setAddFormData] = useState({ //adding new entries
     fullName:'',
@@ -153,14 +168,40 @@ const Decathlon = () => {
 
  return (
   <div className='app-container'>
-    <h1><button type="button"
+
+<header className="App-header">
+        <div>
+          {Object.keys(lngs).map((lng) => (
+            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
+              {lngs[lng].nativeName}
+            </button>
+          ))}
+        </div>
+        <p>
+          <Trans i18nKey="description.part1">
+            Edit <code>src/App.js</code> and save to reload.
+          </Trans>
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t('description.part2')}
+        </a>
+      </header>
+
+
+      <h1><button type="button"
        onClick={(e) => {
          e.preventDefault();
          window.location.href = "http://localhost:3000/decathlon";
-       } }>Mens Decathlon</button> <button type="button" 
+       } }>Decathlon</button> <button type="button" 
     onClick={(e) => {
       e.preventDefault();
       window.location.href="http://localhost:3000/heptathlon"}}>Womens Heptathlon</button></h1>
+      
     <form onSubmit={handleEditFormSubmit}>
     <table>
       <thead>
@@ -168,9 +209,9 @@ const Decathlon = () => {
           <th>Name</th>
           <th>Date of birth</th>
           <th>100m</th>
-          <th>Long jump</th>
-          <th>Shot put</th>
-          <th>High jump</th>
+          <th>Long</th>
+          <th>shotPut</th>
+          <th>High Jump</th>
           <th>400m</th>
           <th>110m hurdles</th>
           <th>Discus</th>
@@ -201,10 +242,11 @@ const Decathlon = () => {
       </tbody>
     </table>
     </form>
-    <h2>Add new competitor</h2>
-    <form onSubmit={handleAddFormSubmit}>
-      <input type="text" name="fullName" required="required" onChange={handleAddFormChange}/>
-      <input type="text" name="dateOfBirth" required="required" onChange={handleAddFormChange}/>
+      <button onClick={() => setToggle(!toggle)} className='btn' >Add new competitor</button>
+      {toggle && (
+      <form onSubmit={handleAddFormSubmit}>
+      <input type="text" name="fullName" onChange={handleAddFormChange}/>
+      <input type="text" name="dateOfBirth" onChange={handleAddFormChange}/>
       <input type="decimal" name="hundredMeters" onChange={handleAddFormChange}/>
       <input type="decimal" name="longJump" onChange={handleAddFormChange}/>
       <input type="decimal" name="shotPut" onChange={handleAddFormChange}/>
@@ -217,7 +259,8 @@ const Decathlon = () => {
       <input type="text" name="fifteenHundredMeters"  onChange={handleAddFormChange}/>
       <button type="submit">Add</button>
     </form>
-  </div>
+    )}   
+    </div>
  );
 }
 

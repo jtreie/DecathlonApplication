@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { doc, addDoc, collection } from 'firebase/firestore'
 import { db } from '../firebase'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useState } from 'react'
+import { doc, updateDoc } from 'firebase/firestore'
 
-export default function AddDecathlete() {
+export default function EditDecathlete() {
     const [name, setName] = useState('')
     const [dateOfBirth, setDOB] = useState('')
     const [hundredMeters, setHundred] = useState('')
@@ -17,40 +16,29 @@ export default function AddDecathlete() {
     const [javelin, setJav] = useState('')
     const [minutes, setMin] = useState('')
     const [seconds, setSec] = useState('')
-    const [uid, setUid] = useState('')
+    const [id, setId] = useState('')
 
-
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            uid = setUid(user.uid);
-            alert("user logged in with id " + uid)
-        } else {
-            alert("user not singed inn")
-        }
-    });
 
     function handleSubmit(e) {
         e.preventDefault();
         if (name === '') {
             return
         }
-        const decathletesCollectionRef = collection(db, 'decaTable');
-        addDoc(decathletesCollectionRef,
-            {
-                name, dateOfBirth, hundredMeters, longJump, shotPut, highJump, fourHundredMeters,
-                hurdles, discus, poleVault, javelin, minutes, seconds, uid
-            })
-            .then(response => {
-                console.log(response)
-            }).catch(error => {
-                console.log(error.message)
-            })
+        const docRef = doc(db, 'decaTable', id)
+        updateDoc(docRef, {
+            name, dateOfBirth, hundredMeters, longJump, shotPut, highJump, fourHundredMeters,
+            hurdles, discus, poleVault, javelin, minutes, seconds,
+        }).then(response => {
+            console.log(response)
+        })
+            .catch(error => console.log(error.message))
     }
+
+
 
     return (
         <div>
-            <h4>Add athletes</h4>
+            <h4>Edit an athlete</h4>
             <form onSubmit={handleSubmit}>
                 <input id='name' type="text" value={name} onChange={e => setName(e.target.value)} />
                 <input id='dateOfBirth' type="text" value={dateOfBirth} onChange={e => setDOB(e.target.value)} />
@@ -65,7 +53,7 @@ export default function AddDecathlete() {
                 <input id='javelin' type="decimal" value={javelin} onChange={e => setJav(e.target.value)} />
                 <input id='minutes' type="decimal" value={minutes} onChange={e => setMin(e.target.value)} />
                 <input id='seconds' type="decimal" value={seconds} onChange={e => setSec(e.target.value)} />
-                <button name='btnName' type="submit">Add</button>
+                <button name='btnName' type="submit">Update</button>
             </form>
         </div>
     )

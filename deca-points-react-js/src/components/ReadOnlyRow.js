@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import hundredMeters from "../Calculator/Decathlon/Runs/hundredMeters.js";
 import longJump from "../Calculator/Decathlon/Jumps/longJump.js";
 import shotPut from "../Calculator/Decathlon/Throws/shotPut.js";
@@ -9,6 +9,9 @@ import discus from "../Calculator/Decathlon/Throws/discusThrow.js";
 import poleVault from "../Calculator/Decathlon/Jumps/poleVault.js";
 import javelin from "../Calculator/Decathlon/Throws/javelinThrow.js";
 import fifteenHundredMeters from "../Calculator/Decathlon/Runs/fifteenHundredMeters.js"
+import {collection, doc, getDocs } from "firebase/firestore"
+import { db } from '../firebase';
+    
 // function pointss(competitor){
 //           var p = a * Math.Pow((Number(competitor.longJump)*100 - b), c);
 //      var points = Math.Floor(p);
@@ -16,6 +19,8 @@ import fifteenHundredMeters from "../Calculator/Decathlon/Runs/fifteenHundredMet
 // }
 
 const ReadOnlyRow = ({ competitor, handleEditClick, handleDeleteClick}) => {
+
+
     const [minutes, seconds] = competitor.fifteenHundredMeters.split(':');
     const time = 60*Number(minutes)+Number(seconds);
 
@@ -132,8 +137,8 @@ const ReadOnlyRow = ({ competitor, handleEditClick, handleDeleteClick}) => {
       return number;
     }
     return (
-        <tr>
-          <td>{competitor.fullName}</td>
+      <tr>
+        <td>{competitor.fullName}</td>
           <td>{competitor.dateOfBirth}</td>
           <td>{competitor.hundredMeters}</td>
           <td>{competitor.longJump}</td>

@@ -20,6 +20,21 @@ function Navigation() {
                 <NavLink className="nav-link" to="/heptathlon">
                   Heptathlon
                 </NavLink>
+                <li className="nav-item">
+                <NavLink className="nav-link" to="/dashboard">
+                  Log Out
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/reset">
+                  Reset password
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/register">
+                  Register
+                </NavLink>
+              </li>
               </li>
             </ul>
           </div>

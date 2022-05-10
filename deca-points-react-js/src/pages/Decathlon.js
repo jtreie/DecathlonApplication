@@ -1,26 +1,44 @@
-import React, { useState, Fragment, Component } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import "../App.css";
 import data from "../deca-mock-data.json";
-import ReadOnlyRow from './ReadOnlyRow';
-import EditableRow from './EditableRow';
-import { useTranslation, Trans } from 'react-i18next'
+import ReadOnlyRow from '../components/ReadOnlyRow';
+import EditableRow from '../components/EditableRow';
+import hundredMeters from "../Calculator/Decathlon/Runs/hundredMeters.js";
+import {Table} from "react-bootstrap"
+import {collection, doc, getDocs } from "firebase/firestore"
+import { db } from '../firebase';
+import longJump from 'Calculator/Decathlon/Jumps/longJump';
+import shotPut from 'Calculator/Decathlon/Throws/shotPut';
+import highJump from 'Calculator/Decathlon/Jumps/highJump';
+import hurdles from 'Calculator/Decathlon/Runs/hurdles';
+import discusThrow from 'Calculator/Decathlon/Throws/discusThrow';
+import poleVault from 'Calculator/Decathlon/Jumps/poleVault';
+import javelinThrow from 'Calculator/Decathlon/Throws/javelinThrow';
+import fifteenHundredMeters from 'Calculator/Decathlon/Runs/fifteenHundredMeters';
+import fourHundred from 'Calculator/Decathlon/Runs/fourHundred';
+import AddDecathlete from './AddDecathlete';
     
 
-const lngs = [
-      { value: 'en', text: "English" },
-      { value: 'est', text: "Eesti" }
-    ]
-const Decathlon = () => {
-  
-  const { t, i18n } = useTranslation(); 
-//   const [lang, setLang] = useState('en');
-//   const handleChange = e => { 
-//     setLang(e.target.value);
-//     let loc = "http://localhost:3000/decathlon";
-//     window.location.replace(loc + "?lng=" + e.target.value);
-// }
 
+const Decathlon = () => {
+
+  const [decathletes, setDecathletes] = useState([])
+  useEffect(() => {
+      getDecathletes()
+  }, [])
+
+  function getDecathletes() {
+      const decathletesCollectionRef = collection(db, 'decaTable');
+      getDocs(decathletesCollectionRef)
+      .then(response => {
+          const deca = response.docs.map(doc => ({data: doc.data(), id:doc.id}))
+          setDecathletes(deca)
+      })
+      .catch(e => console.log(e.message));
+
+  }
+    
   const [toggle, setToggle] = useState(false)
   
   const [competitors, setCompetitors] = useState(data);  //dynamic
@@ -36,7 +54,8 @@ const Decathlon = () => {
     discus:'',
     poleVault:'',
     javelin:'',
-    fifteenHundredMeters:''
+    minutes:'',
+    seconds:''
     
   });
 
@@ -52,7 +71,8 @@ const Decathlon = () => {
     discus:'',
     poleVault:'',
     javelin:'',
-    fifteenHundredMeters:''
+    minutes:'',
+    seconds:''
   });
 
   const [editCompetitorId, setEditCompetitorId] = useState(null);
@@ -95,7 +115,8 @@ const Decathlon = () => {
       discus: addFormData.discus,
       poleVault: addFormData.poleVault,
       javelin: addFormData.javelin,
-      fifteenHundredMeters: addFormData.fifteenHundredMeters
+      minutes: addFormData.minutes,
+      seconds: addFormData.seconds
     };
     const newCompetitors = [...competitors, newCompetitor];
     setCompetitors(newCompetitors);
@@ -117,7 +138,8 @@ const Decathlon = () => {
      discus: competitor.discus,
      poleVault: competitor.poleVault,
      javelin: competitor.javelin,
-     fifteenHundredMeters: competitor.fifteenHundredMeters
+     minutes: competitor.minutes,
+     seconds: competitor. seconds
    };
 
    setEditFormData(formValues);
@@ -139,7 +161,8 @@ const Decathlon = () => {
       discus: editFormData.discus,
       poleVault: editFormData.poleVault,
       javelin: editFormData.javelin,
-      fifteenHundredMeters: editFormData.fifteenHundredMeters
+      minutes: editFormData.minutes,
+      seconds: editFormData.seconds
     };
 
     const newCompetitors = [...competitors];
@@ -156,6 +179,7 @@ const Decathlon = () => {
     setEditCompetitorId(null);
   };
 
+
   const handleDeleteClick = (competitorId) => {
     const newCompetitors = [...competitors];
 
@@ -165,34 +189,24 @@ const Decathlon = () => {
 
     setCompetitors(newCompetitors);
   };
+  const hundredPoints = () => {
+    var number = 0;
+    // if (decathletes.hundredMeters === ''){
+    //   number += 0;
+    // } else if(decathletes.hundredMeters > 17.83 || decathletes.hundredMeters < 9.5) 
+    // {number += 0;
+    // } else{
+    //   number += Number(Math.floor(hundredMeters.hundredMeters.a*Math.pow((hundredMeters.hundredMeters.b-Number(decathletes.data.hundredMeters)), hundredMeters.hundredMeters.c)))
+    // } 
+    number = decathletes.data.hundredMeters;
+    return number;
+  }
 
- return (
+ return ( 
+  
   <div className='app-container'>
-
-<header className="App-header">
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button key={lng} style={{ fontWeight: i18n.resolvedLanguage === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-        </div>
-        <p>
-          <Trans i18nKey="description.part1">
-            Edit <code>src/App.js</code> and save to reload.
-          </Trans>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('description.part2')}
-        </a>
-      </header>
-
-
+    <h4>List of asdasd</h4>
+        
       <h1><button type="button"
        onClick={(e) => {
          e.preventDefault();
@@ -203,7 +217,7 @@ const Decathlon = () => {
       window.location.href="http://localhost:3000/heptathlon"}}>Womens Heptathlon</button></h1>
       
     <form onSubmit={handleEditFormSubmit}>
-    <table>
+    < Table>
       <thead>
         <tr>
           <th>Name</th>
@@ -231,35 +245,51 @@ const Decathlon = () => {
               handleEditFormChange={handleEditFormChange}
               handleCancelClick={handleCancelClick}/> )
              : (
-              <ReadOnlyRow 
-              competitor={competitor} 
-              handleEditClick={handleEditClick}
-              handleDeleteClick={handleDeleteClick}/>)
+               <ReadOnlyRow
+               competitor={competitor}
+               handleEditFormChange={handleEditFormChange}
+               handleCancelClick={handleCancelClick}/>
+              )
             }
           
           </Fragment>
         ))}
+            {decathletes.map((decas) => (<tr>
+            <td key={decas.id}>{decas.data.name}</td>
+            <td key={decas.id}>{decas.data.dateOfBirth}</td>
+            <td key={decas.id}>{decas.data.hundredMeters}</td>
+            <td key={decas.id}>{decas.data.longJump}</td>
+            <td key={decas.id}>{decas.data.shotPut}</td>
+            <td key={decas.id}>{decas.data.highJump}</td>
+            <td key={decas.id}>{decas.data.fourHundredMeters}</td>
+            <td key={decas.id}>{decas.data.hurdles}</td>
+            <td key={decas.id}>{decas.data.discus}</td>
+            <td key={decas.id}>{decas.data.poleVault}</td>
+            <td key={decas.id}>{decas.data.javelin}</td>
+            <td key={decas.id}>{decas.data.minutes}:{decas.data.seconds}</td>
+            <td key={decas.id}>{Number(Math.floor(hundredMeters.hundredMeters.a*Math.pow((hundredMeters.hundredMeters.b-Number(decas.data.hundredMeters)), hundredMeters.hundredMeters.c)))+
+            Number(Math.floor(longJump.longJump.a*Math.pow(Number(decas.data.longJump)*100-longJump.longJump.b, longJump.longJump.c)))+
+            Number(Math.floor(shotPut.shotPut.a*Math.pow((Number(decas.data.shotPut-shotPut.shotPut.b)), shotPut.shotPut.c)))+
+            Number(Math.floor(highJump.highJump.a*Math.pow((Number(decas.data.highJump*100-highJump.highJump.b)), highJump.highJump.c)))+
+            Number(Math.floor(fourHundred.fourHundred.a*Math.pow((fourHundred.fourHundred.b-Number(decas.data.fourHundredMeters)), fourHundred.fourHundred.c)))+
+            Number(Math.floor(hurdles.hurdles.a*Math.pow((hurdles.hurdles.b-Number(decas.data.hurdles)), hurdles.hurdles.c)))+
+            Number(Math.floor(discusThrow.discusThrow.a*Math.pow((Number(decas.data.discus)-discusThrow.discusThrow.b), discusThrow.discusThrow.c)))+
+            Number(Math.floor(poleVault.poleVault.a*Math.pow((Number(decas.data.poleVault)*100-poleVault.poleVault.b), poleVault.poleVault.c)))+
+            Number(Math.floor(javelinThrow.javelinThrow.a*Math.pow((Number(decas.data.javelin)-javelinThrow.javelinThrow.b), javelinThrow.javelinThrow.c)))+
+            Number(Math.floor(fifteenHundredMeters.fifteenHundredMeters.a*Math.pow((fifteenHundredMeters.fifteenHundredMeters.b-Number(decas.data.minutes*60+decas.data.seconds)), fifteenHundredMeters.fifteenHundredMeters.c)))}
+            </td>
+            <td><button type="button" onClick={(event) => handleEditClick(event, decathletes)}>Edit</button>
+            <button type="button" onClick={() => handleDeleteClick(decathletes.id)}>Delete</button></td>
+            </tr>
+            ))}
       </tbody>
-    </table>
+    </Table>
     </form>
-      <button onClick={() => setToggle(!toggle)} className='btn' >Add new competitor</button>
+    
+       <button onClick={() => setToggle(!toggle)} className='btn' >Add new competitor</button>
       {toggle && (
-      <form onSubmit={handleAddFormSubmit}>
-      <input type="text" name="fullName" onChange={handleAddFormChange}/>
-      <input type="text" name="dateOfBirth" onChange={handleAddFormChange}/>
-      <input type="decimal" name="hundredMeters" onChange={handleAddFormChange}/>
-      <input type="decimal" name="longJump" onChange={handleAddFormChange}/>
-      <input type="decimal" name="shotPut" onChange={handleAddFormChange}/>
-      <input type="decimal" name="highJump" onChange={handleAddFormChange}/>
-      <input type="decimal" name="fourHundredMeters" onChange={handleAddFormChange}/>
-      <input type="decimal" name="hurdles" onChange={handleAddFormChange}/>
-      <input type="decimal" name="discus" onChange={handleAddFormChange}/>
-      <input type="decimal" name="poleVault" onChange={handleAddFormChange}/>
-      <input type="decimal" name="javelin"  onChange={handleAddFormChange}/>
-      <input type="text" name="fifteenHundredMeters"  onChange={handleAddFormChange}/>
-      <button type="submit">Add</button>
-    </form>
-    )}   
+        <AddDecathlete />
+      )}
     </div>
  );
 }

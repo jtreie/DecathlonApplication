@@ -3,14 +3,17 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./Translation/i18n";
 import {
   Navigation,
   Footer,
   Home,
+  Heptathlon,
   Decathlon,
-  Heptathlon
-} from "./components";
+  Register,
+  Reset,
+  Dashboard,
+  ListDeca
+} from "./pages";
 
 //   <BrowserRouter basename='/'>
 //     <App />
@@ -40,6 +43,10 @@ ReactDOM.render(
       <Route path="/" element={<Home />} />
       <Route path="/decathlon" element={<Decathlon />} />
       <Route path="/heptathlon" element={<Heptathlon />} />
+      <Route exact path="/register" element={<Register />} />
+      <Route exact path="/reset" element={<Reset />} />
+      <Route exact path="/dashboard" element={<Dashboard />} />
+      <Route exact path="/list" element={<ListDeca />} />
     </Routes>
     <Footer />
   </Router>,

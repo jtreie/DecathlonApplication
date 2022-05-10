@@ -2,8 +2,8 @@ import React, { useState, Fragment } from 'react';
 import { nanoid } from 'nanoid';
 import "../App.css";
 import data from "../hept-mock-data.json";
-import ReadOnlyHeptRow from './ReadOnlyHeptRow.js';
-import EditableHeptRow from './EditableHeptRow';
+import ReadOnlyHeptRow from '../components/ReadOnlyHeptRow.js';
+import EditableHeptRow from '../components/EditableHeptRow';
 
 
   

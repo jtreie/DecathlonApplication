@@ -17,15 +17,15 @@ export default function AddDecathlete() {
     const [javelin, setJav] = useState('')
     const [minutes, setMin] = useState('')
     const [seconds, setSec] = useState('')
-    const [user, setUser] = useState('')
+    const [uid, setUid] = useState('')
     const btnName = document.getElementById('btnName');
     
 
     const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
         if (user) {
-        alert("user logged in with id" + doc(user.id))
-        const uid = user.uid;
+        uid = setUid(user.uid);
+        alert("user logged in with id "+uid)
         } else {
         alert("user not singed inn")
     }
@@ -38,7 +38,7 @@ export default function AddDecathlete() {
         }
         const decathletesCollectionRef = collection(db, 'decaTable');
         addDoc(decathletesCollectionRef, 
-            {name, dateOfBirth, hundredMeters, longJump, shotPut, highJump, fourHundredMeters, hurdles, discus, poleVault, javelin, minutes, seconds})
+            {name, dateOfBirth, hundredMeters, longJump, shotPut, highJump, fourHundredMeters, hurdles, discus, poleVault, javelin, minutes, seconds, uid})
             .then(response => {
             console.log(response)
         }).catch(error => {

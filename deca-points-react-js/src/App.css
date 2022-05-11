@@ -8,8 +8,15 @@
   min-width: 500px;
 }
 
+#main {
+  width: min-content;
+}
+
 #textbox1{
   display: block;
+}
+.text-center {
+  text-align: center;
 }
 
 table {

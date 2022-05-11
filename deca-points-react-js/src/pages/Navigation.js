@@ -11,16 +11,7 @@ function Navigation() {
           </NavLink>
           <div>
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/decathlon">
-                  Decathlon
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/heptathlon">
-                  Heptathlon
-                </NavLink>
-                <li className="nav-item">
+            <li className="nav-item">
                 <NavLink className="nav-link" to="/dashboard">
                   Log Out
                 </NavLink>
@@ -34,7 +25,6 @@ function Navigation() {
                 <NavLink className="nav-link" to="/register">
                   Register
                 </NavLink>
-              </li>
               </li>
             </ul>
           </div>

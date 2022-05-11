@@ -3,8 +3,8 @@ import React from "react";
 function Footer() {
   return (
     <div className="footer">
-      <footer class="py-5 bg-dark fixed-bottom">
-        <div class="container">
+      <footer class="bg-dark fixed-bottom">
+        <div class="">
           <p class="m-0 text-center text-white">
             Copyright &copy; Kümps 2022
           </p>

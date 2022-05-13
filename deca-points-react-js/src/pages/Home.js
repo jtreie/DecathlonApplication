@@ -31,20 +31,20 @@ function Home() {
       // maybe trigger a loading screen
       return;
       }
-      if (user) navigate("/decathlon");
+      if (user) navigate("/");
       }, [user, loading]);
   return(
         
         <div>
-          {competitors && competitors.map(competitor => {
-            return(
-              <div className="blog-container">
-              <h4>{competitor.fullName}</h4>
-              <h4>{competitor.totalScore}</h4>
-              <h3>Peeter OPaan</h3>
-            </div>
-            )
-          })}
+          <div class="text-center"><button type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            window.location.href = "http://localhost:3000/decathlon";
+          }}>Decathlon</button> <button type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = "http://localhost:3000/heptathlon"
+            }}>Womens Heptathlon</button></div>
         <div className="login">
         <div className="login__container">
         <input

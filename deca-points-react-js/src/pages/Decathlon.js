@@ -12,12 +12,9 @@ import jav from "../Calculator/Decathlon/Throws/javelinThrow.js";
 import fifteenHundred from "../Calculator/Decathlon/Runs/fifteenHundredMeters.js"
 import { collection, getDocs, addDoc, doc, deleteDoc, onSnapshot, updateDoc, query } from "firebase/firestore"
 import { db } from '../firebase';
-import { Button, Modal } from 'react-bootstrap';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import EditPopUp from "../components/EditPopUp"
-import { CSVLink } from 'react-csv'
-
-// import { } from "bootstrap/dist/css/bootstrap.min.css";
+import EditPopUp from "../components/EditPopUp";
+import { } from "bootstrap/dist/css/bootstrap.min.css";
 
 
 
@@ -133,8 +130,7 @@ const Decathlon = () => {
     })
       .catch(error => console.log(error.message))
   }
-  //function for edit popup
-  
+  //to make if statements for results
   const ShowDecas = ({ decas }) => {
     const hundredPoints = () => {
       var number = 0;

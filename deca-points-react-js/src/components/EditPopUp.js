@@ -21,7 +21,6 @@ function EditPopUp(props) {
  const [javelin, setJav] = useState('')
  const [minutes, setMin] = useState('')
  const [seconds, setSec] = useState('')
- const [uid, setUid] = useState('')
  const [id, setId] = useState('')
 
  function handleSubmitChange(e) {

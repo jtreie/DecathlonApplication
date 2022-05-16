@@ -40,7 +40,7 @@ function Home() {
           onClick={(e) => {
             e.preventDefault();
             window.location.href = "http://localhost:3000/decathlon";
-          }}>Decathlon</button> <button type="button"
+          }}>Mens Decathlon</button> <button type="button"
             onClick={(e) => {
               e.preventDefault();
               window.location.href = "http://localhost:3000/heptathlon"
